@@ -1,0 +1,1568 @@
+{
+	"info": {
+		"_postman_id": "993fa766-bc77-4a44-b9b9-6f5d88c05ecd",
+		"name": "TestCasesforBestBuy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "PostNewProduct",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"const response = pm.response.json();\r",
+									"\r",
+									"console.log(response.id);\r",
+									"\r",
+									"pm.globals.set(\"productID\", response.id);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Puzzle\",\r\n  \"type\": \"Games\",\r\n  \"upc\": \"Available\",\r\n  \"description\": \"Age +6\",\r\n  \"manufacturer\": \"Trefl\",\r\n  \"model\": \"2000\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/products",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetProductAfterAdding",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/products/:productid",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"products",
+								":productid"
+							],
+							"variable": [
+								{
+									"key": "productid",
+									"value": "{{productID}}\n"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PatchAddedProduct",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"name\": \"Puzzle 2021\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/products/:productid",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"products",
+								":productid"
+							],
+							"variable": [
+								{
+									"key": "productid",
+									"value": "{{productID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteAddedProduct",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/products/:productid",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"products",
+								":productid"
+							],
+							"variable": [
+								{
+									"key": "productid",
+									"value": "{{productID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetProductAfterDeletion",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/products/:productid",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"products",
+								":productid"
+							],
+							"variable": [
+								{
+									"key": "productid",
+									"value": "{{productID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteProductNotFound",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/products/:productid",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"products",
+								":productid"
+							],
+							"variable": [
+								{
+									"key": "productid",
+									"value": "{{productID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PatchProductNotFound",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"name\": \"Puzzle 2021\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/products/:productid",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"products",
+								":productid"
+							],
+							"variable": [
+								{
+									"key": "productid",
+									"value": "{{productID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PostProductWithMissingInfo",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Puzzle\",\r\n  \"type\": \"Games\",\r\n  \"upc\": \"Available\",\r\n  \"description\": \"Age +6\",\r\n  \"manufacturer\": \"Trefl\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/products",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetProductsWithLimitAndSkip",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/products?$limit=1&$skip=1",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"products"
+							],
+							"query": [
+								{
+									"key": "$limit",
+									"value": "1"
+								},
+								{
+									"key": "$skip",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Stores",
+			"item": [
+				{
+					"name": "PostNewStore",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"const response = pm.response.json();\r",
+									"\r",
+									"console.log(response.id);\r",
+									"\r",
+									"pm.globals.set(\"storeID\", response.id);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Best Buy Cairo\",\r\n  \"type\": \"Electronics\",\r\n  \"address\": \"Cairo Festival City\",\r\n  \"city\": \"Cairo\",\r\n  \"state\": \"New Cairo\",\r\n  \"zip\": \"11221\",\r\n  \"hours\": \"09-23\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/stores",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"stores"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetStoreAfterAdding",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/stores/:storeid",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"stores",
+								":storeid"
+							],
+							"variable": [
+								{
+									"key": "storeid",
+									"value": "{{storeID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PatchAddedStore",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"zip\": \"12225\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/stores/:storeid",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"stores",
+								":storeid"
+							],
+							"variable": [
+								{
+									"key": "storeid",
+									"value": "{{storeID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteAddedStore",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/stores/:storeid",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"stores",
+								":storeid"
+							],
+							"variable": [
+								{
+									"key": "storeid",
+									"value": "{{storeID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetStoreAfterDeletion",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/stores/:storeid",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"stores",
+								":storeid"
+							],
+							"variable": [
+								{
+									"key": "storeid",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteStoreNotFound",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/stores/:storeid",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"stores",
+								":storeid"
+							],
+							"variable": [
+								{
+									"key": "storeid",
+									"value": "{{storeID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PatchStoreNotFound",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"zip\": \"50\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/stores/:storeid",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"stores",
+								":storeid"
+							],
+							"variable": [
+								{
+									"key": "storeid",
+									"value": "{{storeID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PostStoresWithMissingInfo",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Best Buy Cairo\",\r\n  \"type\": \"Electronics\",\r\n  \"address\": \"Mall of Egypt\",\r\n  \"hours\": \"09-23\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/stores",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"stores"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetStoresWithLimitAndSkip",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/stores?$limit=1&$skip=1",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"stores"
+							],
+							"query": [
+								{
+									"key": "$limit",
+									"value": "1"
+								},
+								{
+									"key": "$skip",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Services",
+			"item": [
+				{
+					"name": "PostNewService",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"const response = pm.response.json();\r",
+									"\r",
+									"console.log(response.id);\r",
+									"\r",
+									"pm.globals.set(\"serviceID\", response.id);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Software Testing\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/services",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"services"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetServiceAfterAdding",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/services/:serviceid",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"services",
+								":serviceid"
+							],
+							"variable": [
+								{
+									"key": "serviceid",
+									"value": "{{serviceID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PatchAddedService",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"name\": \"API Testing\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/services/:serviceid",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"services",
+								":serviceid"
+							],
+							"variable": [
+								{
+									"key": "serviceid",
+									"value": "{{serviceID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteAddedService",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/services/:serviceid",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"services",
+								":serviceid"
+							],
+							"variable": [
+								{
+									"key": "serviceid",
+									"value": "{{serviceID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetServiceAfterDeletion",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/services/:serviceid",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"services",
+								":serviceid"
+							],
+							"variable": [
+								{
+									"key": "serviceid",
+									"value": "{{serviceID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteServiceNotFound",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/services/:serviceid",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"services",
+								":serviceid"
+							],
+							"variable": [
+								{
+									"key": "serviceid",
+									"value": "{{serviceID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PatchServiceNotFound",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"zip\": \"50\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/services/:serviceid",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"services",
+								":serviceid"
+							],
+							"variable": [
+								{
+									"key": "serviceid",
+									"value": "{{serviceID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PostStoresWithMissingInfo Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"type\": \"Debugging\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/services",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"services"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetServicesWithLimitAndSkip",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/services?$limit=1&$skip=1",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"services"
+							],
+							"query": [
+								{
+									"key": "$limit",
+									"value": "1"
+								},
+								{
+									"key": "$skip",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Categories",
+			"item": [
+				{
+					"name": "PostNewCategory",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"const response = pm.response.json();\r",
+									"\r",
+									"console.log(response.id);\r",
+									"\r",
+									"pm.globals.set(\"categoryID\", response.id);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Java\",\r\n  \"id\": \"24\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/categories",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetCategoryAfterAdding",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/categories/:categoryid",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"categories",
+								":categoryid"
+							],
+							"variable": [
+								{
+									"key": "categoryid",
+									"value": "{{categoryID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PatchAddedCategory",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"name\": \"Python\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/categories/:categoryid",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"categories",
+								":categoryid"
+							],
+							"variable": [
+								{
+									"key": "categoryid",
+									"value": "{{categoryID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteAddedCategory",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/categories/:categoryid",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"categories",
+								":categoryid"
+							],
+							"variable": [
+								{
+									"key": "categoryid",
+									"value": "{{categoryID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetCategoryAfterDeletion",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/categories/:categoryid",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"categories",
+								":categoryid"
+							],
+							"variable": [
+								{
+									"key": "categoryid",
+									"value": "{{categoryID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteCategoryNotFound",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/categories/:categoryid",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"categories",
+								":categoryid"
+							],
+							"variable": [
+								{
+									"key": "categoryid",
+									"value": "{{categoryID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PatchCategoryNotFound",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"zip\": \"50\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/categories/:categoryid",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"categories",
+								":categoryid"
+							],
+							"variable": [
+								{
+									"key": "categoryid",
+									"value": "{{categoryID}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PostCategoriesWithMissingInfo",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"HTML\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/categories",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetCategoriesWithLimitAndSkip",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/services?$limit=2&$skip=5",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"services"
+							],
+							"query": [
+								{
+									"key": "$limit",
+									"value": "2"
+								},
+								{
+									"key": "$skip",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Utilities",
+			"item": [
+				{
+					"name": "GetVersion",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/version",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"version"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetHealthCheck",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/healthcheck",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"healthcheck"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseurl",
+			"value": "http://localhost:3030"
+		}
+	]
+}

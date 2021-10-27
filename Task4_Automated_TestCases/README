@@ -1,0 +1,22 @@
+The Test Cases are created using Postman collection.
+Steps to Run the Test Cases are:
+ -Open the Best Buy API playground.
+ -Run Postman Agent.
+ -Import the attached file "TestCasesforBestBuy.postman_collection.json"
+ -Run the collection
+ 
+ The Test Cases are 38.
+ 
+ For Every one of the objects (Products, Stores, Services, and Categories), the following test cases are to be done: (9 x 4 = 36 Test Cases)
+1. POST a new One Object --> Expect Positive Response.
+2. GET the new Object with its ID --> Expect Positive Response.
+3. PATCH the new Object by changing one of its parameters --> Expect Positive Response.
+4. DELETE the new Object with its ID --> Expect Positive Response.
+5. GET the deleted object with its ID --> Expect Negative Response.
+6. Delete the deleted object with its ID --> Expect Negative Response.
+7. PATCH the deleted object with its ID --> Expect Negative Response.
+8. POST a new Object with missing variables --> Expect Negative Response.
+9. GET the Objects with limit and skip --> Expect Positive Response.
+
+For the utilities (version, and healthcheck), a test case is to be done: (2 Test Cases)
+1. GET for each utility --> Expect Positive Response.
